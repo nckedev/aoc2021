@@ -33,9 +33,6 @@ namespace aoc2021
                 c.value = int.Parse(line[1]);
                 return c;
             }).ToList();
-
-            var sub = new Sub();
-            var sub2 = new Sub2();
         }
 
 
