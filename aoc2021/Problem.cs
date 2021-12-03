@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-
 namespace aoc2021
 {
     abstract class Problem
@@ -12,14 +6,12 @@ namespace aoc2021
         private const string year = "2021";
         private const string baseurl = $"https://adventofcode.com/{year}/day/";
 
-        protected string dayfile;
         protected int day;
-        protected string input;
+        protected string file;
         public Problem(int day)
         {
-            input = GetInputFile(day);
             this.day = day;
-            this.dayfile = $"{day}.txt";
+            this.file = @$"input\{day}.txt";
 
         }
 
@@ -33,7 +25,7 @@ namespace aoc2021
             /* else */
             /* { */
             /* } */
-            return $"input/{dayfile}";
+            return $"input/{file}";
         }
         protected virtual List<T> ReadFileGeneric<T>() 
         {
@@ -43,15 +35,15 @@ namespace aoc2021
         }
         protected virtual List<int> ReadFileInts()
         {
-            return File.ReadLines(input).Select(x => int.Parse(x)).ToList();
+            return File.ReadLines(file).Select(x => int.Parse(x)).ToList();
         }
         protected virtual List<string> ReadFile()
         {
-            return File.ReadAllLines(input).ToList();
+            return File.ReadAllLines(file).ToList();
         }
         protected virtual string[] ReadFileAsArray()
         {
-            return File.ReadAllLines(input);
+            return File.ReadAllLines(file);
         }
 
         protected virtual void Print<T>(string varname, T message)
