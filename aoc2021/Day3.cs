@@ -13,6 +13,24 @@ namespace aoc2021
         {
             input = File.ReadLines(file).Select(x => Convert.ToInt32(x,2)).ToList();
         }
+
+        private int[] CountColumns()
+        {
+
+            int[] count = new int[12];
+
+            for (int i = 0; i < input.Count; i++)
+            {
+                for (int j = 0; j < 12; j++)
+                {
+                    if ((input[i] & (1 << j)) > 0)
+                    {
+                        count[j]++;
+                    }
+                }
+            }
+            return count;
+        }
         public override long Solve()
         {
             int len = input.Count;
