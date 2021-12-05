@@ -14,23 +14,7 @@ namespace aoc2021
             input = File.ReadLines(file).Select(x => Convert.ToInt32(x,2)).ToList();
         }
 
-        private int[] CountColumns()
-        {
-
-            int[] count = new int[12];
-
-            for (int i = 0; i < input.Count; i++)
-            {
-                for (int j = 0; j < 12; j++)
-                {
-                    if ((input[i] & (1 << j)) > 0)
-                    {
-                        count[j]++;
-                    }
-                }
-            }
-            return count;
-        }
+        
         public override long Solve()
         {
             int len = input.Count;
@@ -61,7 +45,67 @@ namespace aoc2021
         }
         public override long Solve2()
         {
-            return 0;
+            int oxygen;
+            int co2;
+
+            int mostcommon = 0;
+            int column = 0;
+            int one  =0;
+            int zero = 0;
+
+            var data = input;
+            while (true)
+            {
+                for (int i = 0; i < data.Count; i++)
+                {
+                    if ((data[i] & (1 << (11 - column))) > 0)
+                    {
+                        //count 1's
+                        one++;    
+                    }
+                    else
+                    {
+                        zero++;
+                    }
+                }
+                mostcommon = one >= zero ? 1 : 0;
+                data = data.Where(x => mostcommon == 1 ? (x & (1 << (11 - column))) > 0 : (x & (1 << 11 -column)) == 0).ToList();
+                column++;
+                one = zero = 0;
+                if (data.Count == 1)
+                {
+                    oxygen = data[0];
+                    break;
+                }
+            }
+
+            data = input;
+            column = 0;
+            int leastcommon = 0;
+            while (true)
+            {
+                for (int i = 0; i < data.Count; i++)
+                {
+                    if ((data[i] & (1 << (11 - column))) == 0)
+                    {
+                        zero++;
+                    }
+                    else
+                    {
+                        one++;
+                    }
+                }
+                leastcommon = one < zero ? 1: 0;    
+                data = data.Where(x => leastcommon == 1 ? (x & (1 << (11 - column))) > 0 : (x & (1 << 11 - column)) == 0).ToList();
+                column++;
+                one = zero = 0; 
+                if (data.Count == 1)
+                {
+                    co2 = data[0];
+                    break;
+                }
+            }
+            return oxygen * co2;
         }
 
     }
