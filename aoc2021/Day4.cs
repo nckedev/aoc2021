@@ -46,7 +46,7 @@ namespace aoc2021
             {
                 return false;
             }
-            int count = 0;
+
             for (int i = 0; i < board.Length; i+=5)
             {
                 var bingo = board.Take(new Range(i, i + 5)).Where(x => x.Marked == true).Count() == 5;
@@ -63,8 +63,6 @@ namespace aoc2021
                 for (int j = 0; j < SIZE; j++)
                 {
                     col = ((SIZE * j) + i) % 25;
-                    //Console.WriteLine(col + "  " + board[col].Number + " " + board[col].Marked);
-                    var d_candidate = board[col].Number;
                     if (board[col].Marked == true)
                     {
                         markedcount++;
@@ -139,7 +137,6 @@ namespace aoc2021
         }
         public override long Solve2()
         {
-            //last winning number (n) is 0 !?!?!
             long last = 0;
             foreach (var n in bingoNumbers){
                 foreach (var b in boards)
