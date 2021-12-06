@@ -19,6 +19,7 @@ namespace aoc2021
     }
     class Board
     {
+        public bool HasHadBingo = false;
         public const int SIZE = 5;
         private BoardNumber[] board;
         public Board(List<BoardNumber> list)
@@ -41,12 +42,19 @@ namespace aoc2021
         }
         public bool HasBingo()
         {
+            if (HasHadBingo) // for part 2
+            {
+                return false;
+            }
             int count = 0;
             for (int i = 0; i < board.Length; i+=5)
             {
                 var bingo = board.Take(new Range(i, i + 5)).Where(x => x.Marked == true).Count() == 5;
-                if ( bingo) 
+                if (bingo)
+                {
+                    HasHadBingo = true; // for part 2
                     return true;
+                }
             }
             var col = 0;
             var markedcount = 0;
@@ -63,7 +71,10 @@ namespace aoc2021
                     }
                 }
                 if (markedcount == 5)
+                {
+                    HasHadBingo = true; // for part 2
                     return true;
+                }
                 markedcount = 0;
             }
             return false;
@@ -138,6 +149,10 @@ namespace aoc2021
                     {
                         last = b.CalcBoard(n);
                     }
+                }
+                if ( n == 0)
+                {
+                    Console.WriteLine("0");
                 }
             }
             return last;
