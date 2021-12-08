@@ -49,12 +49,16 @@ namespace aoc2021
         public Day5() : base(5)
         {
             string[] del = { @" -> ", @", " };
+			
 
-            "".Split(del);
-
-            var test = File.ReadLines(file).Select(x => x.Split(del)).ToList();
-            //var test2 = test.Select(x => x.Split(new string[] {@",", @" -> "}))
-            Console.WriteLine(test.First().First());
+            var test2 = File.ReadLines(file).Select(x => x.Replace(" -> ", ",").Split(",", StringSplitOptions.RemoveEmptyEntries)).ToList();
+			var test = test2.Select(x => Convert.ToInt32(x)).ToList();
+            Console.WriteLine(test.First());
+			for (int i = 0; i < test.Count(); i++){
+				if (i % 3 == 0 && i != 0){
+					/* lines.Add(new Line(new Point(test[i-3], test[i-2]), new Point(test[i-1], test[i]))); */
+				}
+			}
         }
         public override long Solve()
         {
