@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace aoc2021
 
         public BoardNumber(int number, bool marked = false)
         {
-            this.Number = number;  
+            this.Number = number;
             this.Marked = marked;
         }
     }
@@ -25,19 +26,19 @@ namespace aoc2021
         public Board(List<BoardNumber> list)
         {
             board = new BoardNumber[SIZE * SIZE];
-            board = list.ToArray(); 
+            board = list.ToArray();
         }
-        
+
         public bool SetMarked(int number)
         {
-           for (int i = 0; i < board.Length; i++)
+            for (int i = 0; i < board.Length; i++)
             {
                 if (board[i].Number == number)
                 {
                     board[i].Marked = true;
                     return true;
                 }
-            } 
+            }
             return false;
         }
         public bool HasBingo()
@@ -47,7 +48,7 @@ namespace aoc2021
                 return false;
             }
 
-            for (int i = 0; i < board.Length; i+=5)
+            for (int i = 0; i < board.Length; i += 5)
             {
                 var bingo = board.Take(new Range(i, i + 5)).Where(x => x.Marked == true).Count() == 5;
                 if (bingo)
@@ -58,7 +59,7 @@ namespace aoc2021
             }
             var col = 0;
             var markedcount = 0;
-            for (int i = 0;i < SIZE; i++)
+            for (int i = 0; i < SIZE; i++)
             {
                 for (int j = 0; j < SIZE; j++)
                 {
@@ -81,7 +82,7 @@ namespace aoc2021
         public long CalcBoard(int winningNumber)
         {
             var res = 0;
-            foreach( var n in board)
+            foreach (var n in board)
             {
                 if (n.Marked == false)
                 {
@@ -110,7 +111,7 @@ namespace aoc2021
                     board.AddRange(input[i].Split(' ', StringSplitOptions.RemoveEmptyEntries)
                                            .Select(x => new BoardNumber(Convert.ToInt32(x)))
                                            .ToList());
-                    
+
                     boardcount++;
                     if (boardcount % 5 == 0)
                     {
@@ -127,7 +128,7 @@ namespace aoc2021
                 foreach (var b in boards)
                 {
                     b.SetMarked(n);
-                    if ( b.HasBingo())
+                    if (b.HasBingo())
                     {
                         return b.CalcBoard(n);
                     }
@@ -138,7 +139,8 @@ namespace aoc2021
         public override long Solve2()
         {
             long last = 0;
-            foreach (var n in bingoNumbers){
+            foreach (var n in bingoNumbers)
+            {
                 foreach (var b in boards)
                 {
                     b.SetMarked(n);
@@ -147,7 +149,7 @@ namespace aoc2021
                         last = b.CalcBoard(n);
                     }
                 }
-                if ( n == 0)
+                if (n == 0)
                 {
                     Console.WriteLine("0");
                 }

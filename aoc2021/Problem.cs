@@ -11,7 +11,7 @@ namespace aoc2021
         public Problem(int day)
         {
             this.day = day;
-            this.file = @$"input\{day}.txt";
+            this.file = @$"input/{day}.txt";
 
         }
 
