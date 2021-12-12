@@ -17,21 +17,14 @@ namespace aoc2021
         }
     }
 
-    class GridPoint : Point
-    {
-        public int Crossed { get; set; } = 0;
-        public GridPoint(int x, int y) : base(x, y)
-        {
-
-        }
-    }
-
     class Line
     {
         public Point A { get; private set; }
         public Point B { get; private set; }
         public int DeltaX { get => A.X - B.X; }
         public int DeltaY { get => A.Y - B.Y; }
+        public int DirX { get => A.X - B.X < 0 ? 1 : -1; }
+        public int DirY { get => A.Y - B.Y < 0 ? 1 : -1; }
         public Line(Point a, Point b)
         {
             this.A = a;
@@ -40,11 +33,6 @@ namespace aoc2021
         public Line(int a, int b, int c, int d)
             : this(new Point(a, b), new Point(c, d))
         { }
-
-        public int GetCrossedPoits()
-        {
-            return 1;
-        }
     }
     class Day5 : Problem
     {
@@ -83,7 +71,37 @@ namespace aoc2021
                     }
                 }
             }
-            int count = 0;
+            return CountGrid();
+        }
+        public override long Solve2()
+        {
+            foreach (var line in lines)
+            {
+                if (line.DeltaX != 0 && line.DeltaY != 0)
+                {
+                    int x = line.A.X;
+                    int y = line.A.Y;
+                    for (; ; )
+                    {
+                        if (x != line.A.X + line.DirX + (line.DirX * Math.Abs(line.DeltaX)) || y != line.A.Y + line.DirY + (line.DirY * Math.Abs(line.DeltaY)))
+                        {
+                            grid[x, y]++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        x += line.DirX;
+                        y += line.DirY;
+                    }
+                }
+            }
+            return CountGrid();
+        }
+
+        public long CountGrid()
+        {
+            long count = 0;
             for (int i = 0; i < 1000; i++)
             {
                 for (int j = 0; j < 1000; j++)
@@ -96,20 +114,5 @@ namespace aoc2021
             }
             return count;
         }
-        public override long Solve2()
-        {
-            int slope = 0;
-            int count = 0;
-
-            foreach (var line in lines)
-            {
-                if (line.DeltaX > 0 && line.DeltaY > 0)
-                {
-                    slope = line.DeltaX / line.DeltaY;
-                }
-            }
-            return 0;
-        }
-
     }
 }
