@@ -1,6 +1,6 @@
 namespace aoc2021
 {
-    abstract class Problem
+    public abstract class Problem
     {
         private const string sessionid = "53616c7465645f5ff21648947804cf328b562656fa93a21c70304df23a50e9e6c177547848c0785b3ff68b2325ed8d66";
         private const string year = "2021";
