@@ -77,7 +77,7 @@ namespace aoc2021
                 {
                     start = Math.Min(line.A.Y, line.B.Y);
                     delta = Math.Abs(line.DeltaY);
-                    for (int i = 0; i <= start + delta; i++)
+                    for (int i = start; i <= start + delta; i++)
                     {
                         grid[line.A.X, i]++;
                     }
@@ -99,10 +99,15 @@ namespace aoc2021
         public override long Solve2()
         {
             int slope = 0;
-            //if (line.DeltaX > 0 && line.DeltaY > 0)
-            //{
-            //    slope = line.DeltaX / line.DeltaY;
-            //}
+            int count = 0;
+
+            foreach (var line in lines)
+            {
+                if (line.DeltaX > 0 && line.DeltaY > 0)
+                {
+                    slope = line.DeltaX / line.DeltaY;
+                }
+            }
             return 0;
         }
 
