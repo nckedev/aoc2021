@@ -41,9 +41,11 @@ namespace aoc2021
             {
                 offset[f]++;
             }
+
+            long newfish;
             for (int d = 0; d < 256; d++)
             {
-                long newfish = offset[d % 7];
+                newfish = offset[d % 7];
                 offset[d % 7] += offset[7];
                 offset[7] = offset[8];
 
