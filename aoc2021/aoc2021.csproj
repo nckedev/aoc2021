@@ -16,4 +16,9 @@
 	</ItemGroup>
 
 
+	<ItemGroup>
+	  <ContentWithTargetPath Remove="input\Day7.cs" />
+	</ItemGroup>
+
+
 </Project>
