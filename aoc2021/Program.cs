@@ -4,7 +4,7 @@ using System.Diagnostics;
 using aoc2021;
 Console.WriteLine("AOC 2021");
 Stopwatch s = new Stopwatch();
-Problem problem = new Day7();
+Problem problem = new Day8();
 s.Start();
 Console.WriteLine($"Problem 1: {problem.Solve()}");
 s.Stop();
