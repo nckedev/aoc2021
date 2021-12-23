@@ -1,25 +1,27 @@
 using System.Linq;
+
 namespace aoc2021
 {
-
     class Day1 : Problem
     {
-        private List< int> file;
+        private List<int> input;
+
         public Day1() : base(1)
         {
-            file = File.ReadLines("input/1.txt").Select(x=>int.Parse(x)).ToList();
+            input = File.ReadLines(file).Select(int.Parse).ToList();
         }
 
 
         public override long Solve()
         {
-			int count = 0;
-            file.Aggregate((current, next) =>
+            int count = 0;
+            input.Aggregate((current, next) =>
             {
                 if (next > current)
                 {
                     count++;
                 }
+
                 return next;
             });
             return count;
@@ -28,7 +30,7 @@ namespace aoc2021
         public override long Solve2()
         {
             int count = 0;
-            var array = file.ToArray();
+            var array = input.ToArray();
             for (int i = 0; i < array.Length - 3; i++)
             {
                 var current = new Range(i, i + 3);
@@ -38,6 +40,7 @@ namespace aoc2021
                     count++;
                 }
             }
+
             return count;
         }
     }

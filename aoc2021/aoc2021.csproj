@@ -21,4 +21,10 @@
 	</ItemGroup>
 
 
+	<ItemGroup>
+	  <Content Include="input\10.txt" />
+	  <Content Include="input\10_test.txt" />
+	</ItemGroup>
+
+
 </Project>

@@ -3,15 +3,18 @@ namespace aoc2021
     public abstract class Problem
     {
         private const string sessionid = "53616c7465645f5ff21648947804cf328b562656fa93a21c70304df23a50e9e6c177547848c0785b3ff68b2325ed8d66";
-        private const string year = "2021";
-        private const string baseurl = $"https://adventofcode.com/{year}/day/";
+        private const string Year = "2021";
+        private const string Baseurl = $"https://adventofcode.com/{Year}/day/";
 
-        protected int day;
-        protected string file;
-        public Problem(int day)
+        private int day;
+        protected readonly string file;
+        protected string file_test;
+
+        protected Problem(int day)
         {
             this.day = day;
             this.file = @$"input/{day}.txt";
+            this.file_test = @$"input/{day}_test.txt";
 
         }
 

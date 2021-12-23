@@ -9,12 +9,13 @@ namespace aoc2021
     class Day3 : Problem
     {
         List<int> input;
+
         public Day3() : base(3)
         {
-            input = File.ReadLines(file).Select(x => Convert.ToInt32(x,2)).ToList();
+            input = File.ReadLines(file).Select(x => Convert.ToInt32(x, 2)).ToList();
         }
 
-        
+
         public override long Solve()
         {
             int len = input.Count;
@@ -32,17 +33,19 @@ namespace aoc2021
                 }
             }
 
-            for (int i = 0;i < count.Length; i++)
+            for (int i = 0; i < count.Length; i++)
             {
                 if (count[i] > (len >> 1))
                 {
-                    gamma = gamma | (1 << i); 
+                    gamma |= (1 << i);
                 }
             }
-           // input.Select(x => Enumerable.Range(0, 12).Select(a => (x & (1 << a)) > 0 ? count[a]++ : 0));
-          //  gamma = count.Select((b, i) => b > (len >> 1) ?  (1 << i) : 0).Aggregate((a, b) => a | b);
+
+            // input.Select(x => Enumerable.Range(0, 12).Select(a => (x & (1 << a)) > 0 ? count[a]++ : 0));
+            //  gamma = count.Select((b, i) => b > (len >> 1) ?  (1 << i) : 0).Aggregate((a, b) => a | b);
             return gamma * (~gamma & 0xFFF);
         }
+
         public override long Solve2()
         {
             int oxygen;
@@ -50,7 +53,7 @@ namespace aoc2021
 
             int mostcommon = 0;
             int column = 0;
-            int one  =0;
+            int one = 0;
             int zero = 0;
 
             var data = input;
@@ -61,15 +64,17 @@ namespace aoc2021
                     if ((data[i] & (1 << (11 - column))) > 0)
                     {
                         //count 1's
-                        one++;    
+                        one++;
                     }
                     else
                     {
                         zero++;
                     }
                 }
+
                 mostcommon = one >= zero ? 1 : 0;
-                data = data.Where(x => mostcommon == 1 ? (x & (1 << (11 - column))) > 0 : (x & (1 << 11 -column)) == 0).ToList();
+                data = data.Where(x => mostcommon == 1 ? (x & (1 << (11 - column))) > 0 : (x & (1 << 11 - column)) == 0)
+                    .ToList();
                 column++;
                 one = zero = 0;
                 if (data.Count == 1)
@@ -95,18 +100,20 @@ namespace aoc2021
                         one++;
                     }
                 }
-                leastcommon = one < zero ? 1: 0;    
-                data = data.Where(x => leastcommon == 1 ? (x & (1 << (11 - column))) > 0 : (x & (1 << 11 - column)) == 0).ToList();
+
+                leastcommon = one < zero ? 1 : 0;
+                data = data.Where(
+                    x => leastcommon == 1 ? (x & (1 << (11 - column))) > 0 : (x & (1 << 11 - column)) == 0).ToList();
                 column++;
-                one = zero = 0; 
+                one = zero = 0;
                 if (data.Count == 1)
                 {
                     co2 = data[0];
                     break;
                 }
             }
+
             return oxygen * co2;
         }
-
     }
 }

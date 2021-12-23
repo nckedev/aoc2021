@@ -32,9 +32,34 @@ namespace aoc2021
             //vilken bokstav
             //nummer det bildar
             //mappa till riktiga nummer
+            var mappings = new Dictionary<int, string>()
+            {
+                {0, "abcefg"},
+                {1, "cf"},
+                {2, "acdeg"},
+                {3, "acdfg"},
+                {4, "bcdfg"},
+                {5, "abdfg"},
+                {6, "abdefg"},
+                {7, "acf"},
+                {8, "abcdefg"},
+                {9, "abcdfg"}
+            };
             bool[] number = new bool[8];
             
+            
+            
             return 0;
+        }
+
+        struct Number
+        {
+            private char[] pos = new char[8];
+
+            public void Add(string s)
+            {
+                
+            }
         }
     }
 }
