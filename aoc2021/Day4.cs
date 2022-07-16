@@ -50,7 +50,7 @@ namespace aoc2021
 
             for (int i = 0; i < board.Length; i += 5)
             {
-                var bingo = board.Take(new Range(i, i + 5)).Where(x => x.Marked == true).Count() == 5;
+                var bingo = board.Take(new Range(i, i + 5)).Count(x => x.Marked == true) == 5;
                 if (bingo)
                 {
                     HasHadBingo = true; // for part 2

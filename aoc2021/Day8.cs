@@ -56,6 +56,10 @@ namespace aoc2021
         {
             private char[] pos = new char[8];
 
+            public Number()
+            {
+            }
+
             public void Add(string s)
             {
                 

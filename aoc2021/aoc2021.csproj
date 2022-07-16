@@ -24,6 +24,8 @@
 	<ItemGroup>
 	  <Content Include="input\10.txt" />
 	  <Content Include="input\10_test.txt" />
+	  <Content Include="input\11.txt" />
+	  <Content Include="input\11_test.txt" />
 	</ItemGroup>
 
 
